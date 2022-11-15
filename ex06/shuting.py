@@ -1,6 +1,5 @@
 import sys
 from random import choice, randint
-
 import pygame as pg
 
 
@@ -146,6 +145,7 @@ class Score(pg.sprite.Sprite): # スコアの表示を生成するクラス　�
         msg = "Score: %d" % self.score
         self.image = self.font.render(msg, 0, self.color) 
         
+
 def check_bound(obj_rct, scr_rct):
     """
     obj_rct：こうかとんrct，または，爆弾rct
@@ -158,6 +158,7 @@ def check_bound(obj_rct, scr_rct):
     if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom: 
         tate = -1
     return yoko, tate
+
 
 class Deta: #ハイスコア用Txtの変更　布施
     def __init__(self):
@@ -213,13 +214,15 @@ class Font:            #文字表示用　布施
         self.word_sfc=self.word.render(f"{word}",True,colour)   #テキストの設定
         sc.blit(self.word_sfc,syokiiti) #背景sfcに描画
 
-        
-
            
 def main():
     scrn = Screen("進撃のこうかとん", (1600, 900), "fig/bg.jpg")
     player = Prayer("fig/sentou.png", 0.3, (800, 830))
     enemy = Enemy("fig/teki.png", 1.5, (100, 70), (5 , 1))
+
+    pg.mixer.init(frequency = 44100)    # 音楽の追加
+    pg.mixer.music.load("fig/test.mp3")     # 音楽ファイルの読み込み
+    pg.mixer.music.play()              # 音楽の再生回数()
 
     global mod ,sco
     sco=0  #今回の得点用
@@ -237,7 +240,6 @@ def main():
     bullet_count = BulletCount(bullet=bullet)
     thunder = None # エラーを起こさないため
 
-    
     enemy_grp_dct = {} # enemyのグループの辞書を作成
     
     player_grp = pg.sprite.Group(player) # playerに関するグループを作成する
@@ -310,7 +312,6 @@ def main():
                 # playerの弾丸と敵が衝突したときにスコアを更新する
                 score.update(add_score=add_score) 
                 sco=score.score
-                
                 
         
         for event in pg.event.get():
@@ -386,7 +387,6 @@ def main2 ():               #スタート画面　布施
     keikoku=Bird("ex06/data/keikoku.jpg",1.0,(800,450)) 
     ans=0
 
-
     while True:
         nsc=scrn_sfc.blit()
         bird.blit(nsc)
@@ -394,7 +394,6 @@ def main2 ():               #スタート画面　布施
         font1.brit(nsc,[500,600],f"[S] : Start",(255,255,255))
         font1.brit(nsc,[500,700],f"[C] : Clear high score",(255,255,255))
         font2.brit(nsc,[200,150],"進撃のこうかとん",(255,255,255))
-        
         
         if ans==1:
             keikoku.blit(nsc)       #ans=1の時警告画面が出るようにする
@@ -418,6 +417,7 @@ def main2 ():               #スタート画面　布施
         if ans==1 and pressed[pg.K_n]:   #警告画面が出ているときにNを押すとans=0にし警告画面を非表示
             ans=0
         pg.display.update()
+        
 
 def main3 ():              #GameOver画面　布施
     global mod,sco
