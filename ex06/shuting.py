@@ -220,10 +220,6 @@ def main():
     player = Prayer("fig/sentou.png", 0.3, (800, 830))
     enemy = Enemy("fig/teki.png", 1.5, (100, 70), (5 , 1))
 
-    pg.mixer.init(frequency = 44100)    # 音楽の追加
-    pg.mixer.music.load("fig/test.mp3")     # 音楽ファイルの読み込み
-    pg.mixer.music.play()              # 音楽の再生回数()
-
     global mod ,sco
     sco=0  #今回の得点用
     hiscore=Deta()  #ハイスコアの読み込み
@@ -417,7 +413,7 @@ def main2 ():               #スタート画面　布施
         if ans==1 and pressed[pg.K_n]:   #警告画面が出ているときにNを押すとans=0にし警告画面を非表示
             ans=0
         pg.display.update()
-        
+
 
 def main3 ():              #GameOver画面　布施
     global mod,sco
