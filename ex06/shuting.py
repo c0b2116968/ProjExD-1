@@ -1,6 +1,6 @@
 import sys
-from random import randint, choice
-from random import randint
+from random import choice, randint
+
 import pygame as pg
 
 
@@ -236,6 +236,7 @@ def main():
     score = Score()
     bullet_count = BulletCount(bullet=bullet)
     thunder = None # エラーを起こさないため
+
     
     enemy_grp_dct = {} # enemyのグループの辞書を作成
     
@@ -334,7 +335,6 @@ def main():
             if event.type == 30:
                 # 1.5秒経ったときenemyを生成する。
                 enemyx = randint(100, 1500)
-
                 enemy = Enemy("fig/teki.png", 1.5, (enemyx, 70), (5 , 1))  
 
                 spdx = randint(-5, 5)
